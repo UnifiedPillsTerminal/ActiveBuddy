@@ -131,4 +131,6 @@ STATIC_URL = 'static/'
 # Custom User model
 AUTH_USER_MODEL = 'users.MyUser'
 
+LOGIN_REDIRECT_URL = 'pages:homepage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
