@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
     'debug_toolbar',
 ]
 
@@ -53,10 +54,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'activebuddy.urls'
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': (TEMPLATES_DIR,),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'activebuddy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'activebuddydb',
+        'USER': 'postgres',
+        'PASSWORD': '!qwe@123#',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -105,11 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = False
 
 USE_TZ = True
 
@@ -117,13 +126,9 @@ INTERNAL_IPS = [
     '127.0.0.1.',
 ]
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# Custom User model
+AUTH_USER_MODEL = 'users.MyUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
