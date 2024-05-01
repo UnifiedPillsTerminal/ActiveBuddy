@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+    Главная страница Homepage
+{% endblock %}
+{% block content %}
+    HomePage.
+    {% if user.is_authenticated %}
+        <h2>Current user: {{ user.username }}</h2>
+    {% else %}
+        <h2> You aren't logged in.</h2>
+    {% endif %}
+{% endblock %}

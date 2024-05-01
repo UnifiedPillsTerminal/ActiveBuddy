@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, reverse_lazy
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
+
 
 import django.contrib.auth
 
 
 urlpatterns = [
+    path('', include('pages.urls')),
     path('admin/', admin.site.urls),
     path('__debug__', include('debug_toolbar.urls')),
     path('auth/', include('users.urls')),

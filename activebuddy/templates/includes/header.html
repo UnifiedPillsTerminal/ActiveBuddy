@@ -1,0 +1,32 @@
+<header>
+    <nav>
+        <div>
+            This is header Placeholder
+            <ul>
+                <li><a href="{% url 'pages:homepage' %}">Главная</a></li>
+                <li><a href="#diary">Дневник</a></li>
+                <li><a href="#shop">Магазин</a></li>
+                <li><a href="#tamagotchi">Тамагочи</a></li>
+                <li><a href="#settings">Параметры</a></li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                <span>Пользователь: <b>{{ user.username }}</b></span>
+                <li>
+                    <a href="{% url 'users:password_change' %}">Изменить пароль</a>
+                </li>
+                <li>
+                    <form action="{% url 'users:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+                </div>
+            {% else %}
+                <span>
+                    <a href="{% url 'users:login' %}">Войти</a>
+                    <a href="{% url 'users:register' %}">Зарегистрироваться</a>
+                </span>
+            {% endif %}
+    </nav>
+</header>

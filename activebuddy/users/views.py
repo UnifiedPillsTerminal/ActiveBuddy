@@ -5,6 +5,6 @@ from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm
 
 class RegisterView(CreateView):
-    template_name = 'register/register_form.html'
+    template_name = 'registration/registration_form.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('pages:homepage')

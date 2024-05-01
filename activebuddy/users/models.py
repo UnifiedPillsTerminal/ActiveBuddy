@@ -8,7 +8,6 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, username, email=None, password=None, **extra_fields):
         if not username:
             raise ValueError('The username field must be set.')
-        username = self.normalize_username(username)
         user = self.model(username=username, email=email, **extra_fields)
         if password is None:
             user.set_unusable_password()
@@ -21,7 +20,7 @@ class CustomUserManager(BaseUserManager):
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuse') is not True:
+        if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
         
         return self.create_user(username, email, password, **extra_fields)
@@ -33,11 +32,12 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(verbose_name='Фамилия', max_length=150, blank=True)
     patronim = models.CharField(verbose_name='Отчество', max_length=150, blank=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
 #TODO: remove 'blank=True' for 'on_pause' when implementing progress pause algorithm
     on_pause = models.BooleanField(verbose_name='Прогресс приостановлен', default=False, blank=True)
-    backup_email = models.EmailField(verbose_name='Резервная электронная почта', unique=True, blank=True)
+    backup_email = models.EmailField(verbose_name='Резервная электронная почта', unique=True, null=True, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'password']
