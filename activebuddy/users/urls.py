@@ -38,4 +38,14 @@ urlpatterns = [
         inbuilt.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path(
+        "email/change/",
+        views.BaseEmailChangeView.as_view(),
+        name="base_email_update",
+    ),
+    path(
+        "email/change/done",
+        views.EmailChangeDoneView.as_view(),
+        name="email_change_done",
+    )
 ]

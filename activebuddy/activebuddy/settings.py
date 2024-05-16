@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'inventory.apps.InventoryConfig',
     'debug_toolbar',
 ]
 
@@ -72,6 +73,9 @@ TEMPLATES = [
         },
     },
 ]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 WSGI_APPLICATION = 'activebuddy.wsgi.application'
 
