@@ -7,7 +7,7 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
-    path('login/', inbuilt.LoginView.as_view(), name="login"),
+    path('login/', inbuilt.LoginView.as_view(), name='login'),
     path('logout/', inbuilt.LogoutView.as_view(), name='logout'),
     path('register/', views.RegisterView.as_view(), name='register'),
 
@@ -20,9 +20,10 @@ urlpatterns = [
         name="password_change_done",
     ),
     
-    path("new-pwd/", 
-    inbuilt.PasswordResetView.as_view(success_url=reverse_lazy('users:password_email_sent')), 
-    name="password_reset"),
+    path(
+        "new-pwd/", 
+        inbuilt.PasswordResetView.as_view(success_url=reverse_lazy('users:password_email_sent')), 
+        name="password_reset"),
     path(
         "new-pwd/email-sent/",
         inbuilt.PasswordResetDoneView.as_view(),
@@ -37,15 +38,5 @@ urlpatterns = [
         "new-pwd/done/",
         inbuilt.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
-    ),
-    path(
-        "email/change/",
-        views.BaseEmailChangeView.as_view(),
-        name="base_email_update",
-    ),
-    path(
-        "email/change/done",
-        views.EmailChangeDoneView.as_view(),
-        name="email_change_done",
     )
 ]

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    Параметры
+{% endblock %}
+{% block content %}
+    Учётная запись
+    {% if user.is_authenticated %}
+        <h2>Current user: {{ user.username }}</h2>
+        <hr>
+        <h2>General Settings</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <p>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ email }}">
+            </p>
+            <p>
+                <label for="on_pause">On Pause:</label>
+                <input type="checkbox" id="on_pause" name="on_pause" {% if on_pause %}checked{% endif %} value="True">
+            </p>
+            <p>
+                <label for="backup_email">Backup Email:</label>
+                <input type="email" id="backup_email" name="backup_email" value="{{ backup_email }}">
+            </p>
+            <p>
+                <input type="submit" value="Update">
+            </p>
+        </form>
+    {% else %}
+        <h2>You aren't logged in.</h2>
+    {% endif %}
+{% endblock %}
