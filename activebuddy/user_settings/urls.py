@@ -5,7 +5,7 @@ from . import views
 app_name = 'settings'
 
 urlpatterns = [
-    path('', views.SettingsListView.as_view() ,name='settings'),
+    path('', views.SettingsListView.as_view(), name='settings'),
 ]
 
     # path(

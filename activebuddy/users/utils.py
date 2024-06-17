@@ -1,8 +1,11 @@
+from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.utils.decorators import decorator_from_fn
+from functools import wraps
 
-on_pause_redirect = decorator_from_fn(
-    lambda func: lambda self, request, *args, **kwargs: (
-        HttpResponseRedirect('pages:settings') if getattr(self.request.user, 'on_pause') else func(self, request, *args, **kwargs)
-    )
-)
+def on_pause_redirect(func):
+    @wraps(func)
+    def wrapper(self, request, *args, **kwargs):
+        if getattr(self.request.user, 'on_pause'):
+            return HttpResponseRedirect(reverse('settings:settings'))
+        return func(self, request, *args, **kwargs)
+    return wrapper
